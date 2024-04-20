@@ -2,9 +2,6 @@
   "version": 2,
   "rewrites": [{ "source": "/(.*)", "destination": "/server/server" }],
   "functions": {
-    "server/*": {
-      "memory": 3009,
-      "maxDuration": 60
-    }
+    "server/*.js": { "maxDuration": 10 }
   }
 }
