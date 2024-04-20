@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import NxWelcome from './nx-welcome';
-
 import {Ui} from '@nx-repo/ui'
 
 import { Link, Route, Routes } from 'react-router-dom';
