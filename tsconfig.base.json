@@ -1,0 +1,24 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nx-repo/ui": ["libs/shared/ui/src/index.ts"],
+      "checkout/Module": ["apps/checkout/src/remote-entry.ts"],
+      "product/Module": ["apps/product/src/remote-entry.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

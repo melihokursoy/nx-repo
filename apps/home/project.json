@@ -1,0 +1,161 @@
+{
+  "name": "home",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/home/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/home/browser",
+        "index": "apps/home/src/index.html",
+        "baseHref": "/",
+        "main": "apps/home/src/main.ts",
+        "tsConfig": "apps/home/tsconfig.app.json",
+        "assets": ["apps/home/src/favicon.ico", "apps/home/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "apps/home/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/home/src/environments/environment.ts",
+              "with": "apps/home/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-ssr-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "browserTarget": "home:build:development",
+        "serverTarget": "home:serve-server:development",
+        "port": 4200,
+        "browserTargetOptions": {
+          "watch": true
+        },
+        "devRemotes": ["product", "checkout"]
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "browserTarget": "home:build:production",
+          "serverTarget": "home:serve-server:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/home/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "home:build",
+        "watch": false,
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "home:build:development"
+        },
+        "production": {
+          "buildTarget": "home:build:production"
+        }
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "main": "apps/home/server.ts",
+        "outputPath": "dist/apps/home/server",
+        "outputFileName": "server.js",
+        "tsConfig": "apps/home/tsconfig.server.json",
+        "compiler": "babel",
+        "externalDependencies": "all",
+        "outputHashing": "none",
+        "webpackConfig": "apps/home/webpack.server.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "optimization": false,
+          "sourceMap": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/home/src/environments/environment.ts",
+              "with": "apps/home/src/environments/environment.prod.ts"
+            }
+          ],
+          "sourceMap": false
+        }
+      }
+    },
+    "serve-browser": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "home:build",
+        "hmr": true,
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "home:build:development"
+        },
+        "production": {
+          "buildTarget": "home:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "serve-server": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "home:server:development",
+        "buildTargetOptions": {
+          "watch": true
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "buildTarget": "home:server:production"
+        }
+      }
+    }
+  }
+}
