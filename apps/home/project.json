@@ -99,8 +99,8 @@
       "options": {
         "target": "node",
         "main": "apps/home/server.ts",
-        "outputPath": "dist/apps/home/server",
-        "outputFileName": "server.js",
+        "outputPath": "dist/apps/home/api",
+        "outputFileName": "index.js",
         "tsConfig": "apps/home/tsconfig.server.json",
         "compiler": "babel",
         "externalDependencies": "all",

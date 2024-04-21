@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/server",
+    "outDir": "../../out-tsc/api",
     "target": "es2019",
     "types": [
       "node",
