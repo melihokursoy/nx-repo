@@ -90,7 +90,7 @@
         "target": "node",
         "main": "apps/checkout/server.ts",
         "outputPath": "dist/apps/checkout/server",
-        "outputFileName": "index.js",
+        "outputFileName": "server.js",
         "tsConfig": "apps/checkout/tsconfig.server.json",
         "compiler": "babel",
         "externalDependencies": "all",
